@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Grid - App per la Scuola</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Coding Grid</h1>
+        <p class="subtitle">Programma il movimento dell'oggetto usando le frecce direzionali</p>
+        
+        <div class="main-content">
+            <!-- Griglia di gioco -->
+            <div class="game-section">
+                <h2>Griglia di Gioco</h2>
+                <div id="grid" class="grid"></div>
+            </div>
+
+            <!-- Pannello di controllo -->
+            <div class="control-section">
+                <h2>Comandi</h2>
+                
+                <!-- Sequenza di comandi -->
+                <div class="command-sequence" id="commandSequence">
+                    <p class="empty-message">Nessun comando inserito</p>
+                </div>
+
+                <!-- Pulsanti direzionali -->
+                <div class="direction-buttons">
+                    <div class="button-row">
+                        <button class="dir-btn" data-direction="up" title="Su">⬆️</button>
+                    </div>
+                    <div class="button-row">
+                        <button class="dir-btn" data-direction="left" title="Sinistra">⬅️</button>
+                        <button class="dir-btn" data-direction="down" title="Giù">⬇️</button>
+                        <button class="dir-btn" data-direction="right" title="Destra">➡️</button>
+                    </div>
+                </div>
+
+                <!-- Pulsanti di controllo -->
+                <div class="action-buttons">
+                    <button id="startBtn" class="btn btn-start">▶️ Start</button>
+                    <button id="resetBtn" class="btn btn-reset">🔄 Reset</button>
+                    <button id="clearBtn" class="btn btn-clear">🗑️ Cancella Comandi</button>
+                </div>
+
+                <!-- Pulsante scarica PDF -->
+                <div class="pdf-section">
+                    <button id="downloadPdfBtn" class="btn btn-pdf">📄 Scarica PDF Griglia</button>
+                    <p class="pdf-hint">Salva la griglia con ostacoli e traguardo</p>
+                </div>
+
+                <!-- Modalità ostacoli -->
+                <div class="obstacle-mode">
+                    <button id="obstacleBtn" class="btn btn-obstacle">🚧 Modalità Ostacoli</button>
+                    <p class="obstacle-hint">Clicca sulla griglia per posizionare/rimuovere ostacoli</p>
+                </div>
+
+                <!-- Modalità traguardo -->
+                <div class="goal-mode">
+                    <button id="goalBtn" class="btn btn-goal">🏁 Modalità Traguardo</button>
+                    <p class="goal-hint">Clicca sulla griglia per posizionare il traguardo</p>
+                </div>
+
+                <!-- Informazioni -->
+                <div class="info">
+                    <p>📍 Posizione: <span id="position">(0, 0)</span></p>
+                    <p>📝 Comandi: <span id="commandCount">0</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal di allerta per ostacolo -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <div class="alert-icon">⚠️</div>
+            <h2>ALLARME!</h2>
+            <p>Il robot ha colpito un ostacolo!</p>
+            <div class="collision-animation">💥</div>
+            <button id="closeModalBtn" class="btn btn-start">OK, Riprovo!</button>
+        </div>
+    </div>
+
+    <!-- Modal di vittoria -->
+    <div id="victoryModal" class="modal">
+        <div class="modal-content victory">
+            <div class="victory-icon">🎉</div>
+            <h2>CONGRATULAZIONI!</h2>
+            <p>Hai raggiunto il traguardo!</p>
+            <div class="trophy-animation">🏆</div>
+            <div class="stars">
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+            </div>
+            <p class="victory-stats">Comandi utilizzati: <span id="usedCommands">0</span></p>
+            <button id="closeVictoryBtn" class="btn btn-start">Nuova Sfida!</button>
+        </div>
+    </div>
+
+    <!-- Audio per l'allarme -->
+    <audio id="alarmSound" preload="auto">
+        <!-- Generiamo il suono tramite Web Audio API -->
+    </audio>
+
+    <!-- Libreria jsPDF per generare PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Libreria html2canvas per catturare la griglia -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
